@@ -39,7 +39,7 @@
     </q-btn-dropdown>
     <q-btn-dropdown color="primary" label="Mouvements">
           <q-list>
-            <q-item clickable v-close-popup @click="setFilter">
+            <q-item clickable v-close-popup @click="alert=!alert">
               <q-item-section>
                 <q-item-label>Saisir un paiement</q-item-label>
               </q-item-section>
@@ -59,12 +59,18 @@
           </q-list>
         </q-btn-dropdown>
         <q-btn @click="clear" label="Clear"></q-btn>
+        <AddBilling :alert.sync="alert" />
   </div>
 </template>
 
 <script>
 
+import AddBilling from '@/components/AddBilling'
+
 export default {
+  components:{
+    AddBilling
+  },
   data() {
     return {
       multiple: null,
@@ -73,12 +79,12 @@ export default {
         'Paiement', 'Zob'
       ],
       search:'',
+      alert:false
     }
   },
   methods: {
     setFilter(filter) {
-      // this.$store.dispatch('updateFilter', filter );
-      this.$store.commit('addFilter', filter)
+      this.$store.dispatch('updateFilter', filter )
     },
     clear() {
       this.$store.commit('addFilter', '')

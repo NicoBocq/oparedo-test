@@ -5,38 +5,42 @@ Vue.use(Vuex);
 
 import billings from '@/db/billings'
 
-// const loadState = () => {
-//   try {
-//     const serializedState = localStorage.getItem('cities');
-//     if (serializedState === null) {
-//       return undefined;
-//     }
-//     return JSON.parse(serializedState);
-//   } catch (err) {
-//     return undefined;
-//   }
-// };
+const loadState = () => {
+  try {
+    const serializedState = localStorage.getItem('billings');
+    if (serializedState === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return undefined;
+  }
+};
 
-// const saveState = (state) => {
-//   try {
-//     const serializedState = JSON.stringify(state);
-//     localStorage.setItem('cities', serializedState);
-//   } catch (err) {
-//     console.error(`Something went wrong: ${err}`);
-//   }
-// }
+const saveState = (state) => {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem('billings', serializedState);
+  } catch (err) {
+    console.error(`Something went wrong: ${err}`);
+  }
+}
 
 export default new Vuex.Store({
   strict: true,
   state: {
     client:'',
-    billings: billings,
-    category:'',
+    billings: loadState() || billings,
+    addPopUp:false,
     filter:'',
   },
   mutations: {
     addFilter( state, payload ){
       state.filter = payload
+    },
+    addBilling( state, payload ){
+      state.billings.push(payload)
+      saveState(state.billings)
     },
   },
   actions: {
@@ -44,14 +48,9 @@ export default new Vuex.Store({
     updateFilter({commit}, payload){
       commit('addFilter', payload)
     },
-    /* eslint-disable */
-    // add (state, city) {
-		// 	if (!city || cities.includes(city)) {
-    //     return
-    //   }
-		// 	state.cities.push(city)
-		// 	saveState(state.cities)
-		// },
+    updateBillings({commit}, payload){
+      commit('addBilling', payload)
+    },
   },
   getters: {
     billings: state => state.billings,
