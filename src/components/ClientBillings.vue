@@ -116,7 +116,6 @@ export default {
     }
   },
   computed: {
-    // ...mapState(['billings']),
     ...mapGetters([
       'billingsFiltered'
     ])
