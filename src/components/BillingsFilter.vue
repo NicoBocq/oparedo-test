@@ -17,6 +17,7 @@
       label="Recouvrement"
     />
     <q-btn @click="setFilter('Paiement')" label="Go"></q-btn>
+    
     <q-btn-dropdown
       split
       label="Lettrage"
@@ -57,6 +58,7 @@
             </q-item>
           </q-list>
         </q-btn-dropdown>
+        <q-btn @click="clear" label="Clear"></q-btn>
   </div>
 </template>
 
@@ -78,6 +80,9 @@ export default {
       // this.$store.dispatch('updateFilter', filter );
       this.$store.commit('addFilter', filter)
     },
+    clear() {
+      this.$store.commit('addFilter', '')
+    }
   },
   watch: {
     search(val) {

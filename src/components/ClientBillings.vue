@@ -3,7 +3,7 @@
     <q-table
       :rows-per-page-options="[0]"
       row-key="id"
-      :data="data"
+      :data="billingsFiltered"
       :columns="columns"
       :selected-rows-label="getSelectedString"
       selection="multiple"
@@ -16,13 +16,12 @@
 <script>
 
 import * as moment from 'moment'
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   
   data () {
     return {
-      data: [],
       selected: [],
       pagination: {
         rowsPerPage: 0
@@ -117,7 +116,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['billings']),
+    // ...mapState(['billings']),
     ...mapGetters([
       'billingsFiltered'
     ])
@@ -128,7 +127,7 @@ export default {
     },
   },
   mounted() {
-    this.data = this.billingsFiltered
+    
   },
 }
 </script>

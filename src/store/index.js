@@ -32,11 +32,11 @@ export default new Vuex.Store({
     client:'',
     billings: billings,
     category:'',
-    filterTest:'',
+    filter:'',
   },
   mutations: {
     addFilter( state, payload ){
-      state.filterTest = payload
+      state.filter = payload
     },
   },
   actions: {
@@ -55,10 +55,10 @@ export default new Vuex.Store({
   },
   getters: {
     billings: state => state.billings,
-    filterTest: state => state.filterTest,
+    filter: state => state.filter,
     billingsFiltered: state => {
-      if (state.filterTest !== '') {
-        return state.billings.filter(billing => billing.type === state.filterTest)
+      if (state.filter !== '') {
+        return state.billings.filter(billing => billing.type === state.filter)
       } else {
         return state.billings
       }
