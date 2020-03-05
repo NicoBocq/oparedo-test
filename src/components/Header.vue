@@ -11,7 +11,7 @@
       />
 
       <q-toolbar-title>
-        Zob
+        Oparedo
       </q-toolbar-title>
 
       <div></div>

@@ -1,20 +1,25 @@
 <template>
-  <q-page>
-    <Client />
-    <ClientBillings />
-  </q-page>
+  <q-page-container>
+    <q-page padding>
+      <Client />
+      <BillingsFilter />
+      <ClientBillings />
+    </q-page>
+  </q-page-container>
 </template>
 
 <script>
 import { fasGlobeAmericas, fasFlask } from '@quasar/extras/fontawesome-v5';
 import ClientBillings from '@/components/ClientBillings.vue';
 import Client from '@/components/Client.vue';
+import BillingsFilter from '@/components/BillingsFilter.vue';
 
 export default {
   name: 'ClientLayout',
   components: {
     ClientBillings,
-    Client
+    Client,
+    BillingsFilter
   },
   data() {
     return {
