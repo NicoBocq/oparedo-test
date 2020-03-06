@@ -5,13 +5,15 @@
       row-key="id"
       :data="billingsFiltered"
       :columns="columns"
-      :selected-rows-label="getSelectedString"
       selection="multiple"
       :selected.sync="selected"
-      :pagination="pagination"
+      :pagination.sync="pagination"
     >
     </q-table>
-    <BillingReconcialiation v-if="selectedBilling" :selected ="selected" />
+    <BillingReconcialiation
+      :selected.sync="selected"
+      key="billing-reconciliation"
+    />
   </div>
 </template>
 
@@ -29,17 +31,19 @@ export default {
     return {
       selected: [],
       pagination: {
-        rowsPerPage: 50
-        
+        rowsPerPage: 50,
+        sortBy: 'date',
+        descending: true,
+        order: 'desc',
       },
       columns: [
         {
-          name: 'desc',
+          name: 'date',
           required: true,
           label: 'Date',
           align: 'left',
           field: row => row.createdAt,
-          format: val => `${val}`,
+          format: val => moment(val).format('D/M/YYYY'),
           sortable: true
         },
         { 
@@ -119,25 +123,15 @@ export default {
       ]
     }
   },
-  filters: {
-    moment(date) {
-      return moment(date).format('Do MMMM YYYY');
-    }
-  },
   computed: {
     ...mapGetters([
       'billingsFiltered', 'selectedBilling'
     ]),
   },
   methods: {
-    getSelectedString() {
-      return this.selected.length === 0 ? '' : `${this.selected.length} record${this.selected.length > 1 ? 's' : ''} selected of ${this.data.length}`
-    },
-  },
-  watch: {
-    data(val){
-      console.log(val)
-    }
-  },
+    // getSelectedString() {
+    //   return this.selected.length === 0 ? '' : `${this.selected.length} record${this.selected.length > 1 ? 's' : ''} selected of ${this.data.length}`
+    // },
+  }
 }
 </script>
