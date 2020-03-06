@@ -4,8 +4,6 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 import billings from '@/db/billings'
-import clients from '@/db/clients'
-
 
 const loadState = () => {
   try {
@@ -31,7 +29,6 @@ const saveState = (state) => {
 export default new Vuex.Store({
   strict: true,
   state: {
-    clients: clients,
     billings: loadState() || billings,
     filter:'',
     selectedBilling:'',
@@ -46,7 +43,6 @@ export default new Vuex.Store({
     },
     addSelectedBilling( state, payload ){
       state.selectedBilling = payload
-      console.log(payload)
     }
   },
   actions: {
@@ -63,7 +59,6 @@ export default new Vuex.Store({
   getters: {
     selectedBilling: state => state.selectedBilling,
     filter: state => state.filter,
-    clients: state => state.clients,
     billingsFiltered: state => {
       if (state.filter !== '') {
         return state.billings.filter(billing => billing.type === state.filter)

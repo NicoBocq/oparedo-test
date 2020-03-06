@@ -3,7 +3,7 @@
     <q-input 
       v-model="search"
       label="Rechercher par montant ou lettrage"
-      style="width=350px"
+      style="width:350px"
       ></q-input>
     <q-select
       v-model="multiple"
@@ -13,13 +13,6 @@
       style="width: 250px"
       use-chips
       stack-label
-    />
-
-    <q-select
-      v-model="model"
-      :options="options"
-      label="Recouvrement"
-      style="width: 250px"
     />
     
     <q-btn-dropdown

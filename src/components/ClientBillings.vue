@@ -8,11 +8,13 @@
       selection="multiple"
       :selected.sync="selected"
       :pagination.sync="pagination"
+      
     >
     </q-table>
     <BillingReconcialiation
-      :selected.sync="selected"
+      :selected="selected"
       key="billing-reconciliation"
+      v-if="selectedBilling"
     />
   </div>
 </template>
@@ -129,7 +131,7 @@ export default {
   },
   methods: {
     // getSelectedString() {
-    //   return this.selected.length === 0 ? '' : `${this.selected.length} record${this.selected.length > 1 ? 's' : ''} selected of ${this.data.length}`
+    //   return this.selected.length === 0 ? '' : `${this.selected.length} élément${this.selected.length > 1 ? 's' : ''} sélectionné sur ${this.data.length}`
     // },
   }
 }

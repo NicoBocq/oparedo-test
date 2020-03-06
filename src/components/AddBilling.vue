@@ -25,8 +25,8 @@
             <template v-if="this.toggleType === 'credit'">
               <q-input
                 label="Montant"
-                v-model="newBilling.credit"
-                number
+                v-model.number="newBilling.credit"
+                type="number"
                 dense
                 class="q-ml-md"
               ></q-input>
@@ -35,8 +35,8 @@
             <template v-if="this.toggleType === 'debit'">
               <q-input
                 label="Montant"
-                v-model="newBilling.debit"
-                number
+                v-model.number="newBilling.debit"
+                type="number"
                 dense
                 class="q-ml-md"
               ></q-input>

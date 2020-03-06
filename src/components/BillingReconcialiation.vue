@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ selected }}
     <q-dialog v-model="dialogPrompt" persistent>
         <q-card style="width: 700px; max-width: 80vw;">
         <q-card-section class="row items-center">
@@ -18,7 +17,11 @@
         </q-card-section>
         <q-card-actions align="right">
           <q-btn flat label="Non, merci" color="light" @click="close" />
-          <q-btn label="Oui, sélectionnez des mouvements" color="primary" @click="startConcialiation" />
+          <q-btn
+            label="Oui, sélectionnez des mouvements"
+            color="primary"
+            @click="initConcialiation"
+          />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -34,13 +37,19 @@
           <q-btn
             label="Réconcilier les mouvements sélectionnés"
             color="primary"
-            @click="startConcialiation"
+            @click="saveConcialiation"
+            :disabled="solde != 0"
           />
-          <q-btn flat label="Annuler la sélection" color="light" @click="closeConcialiation" />
+          <q-btn
+            flat
+            label="Annuler la sélection"
+            color="light"
+            @click="closeConcialiation"
+          />
           <q-space />
           <div class="solde">
             <div class="label">Total solde :</div>
-            <div class="text-h4" :class="soldeColor" dark>200</div>
+            <div class="text-h4" :class="soldeColor" dark>{{ concialitionCalc }}</div>
             <div class="cur">EUR</div>
           </div>
         </q-card-actions>
@@ -50,8 +59,6 @@
 </template>
 
 <script>
-
-// import mapGetters from 'vuex'
 
 export default {
   props: {
@@ -64,27 +71,38 @@ export default {
     return {
       dialogPrompt: true,
       dialogReconciliation:false,
-      solde:0,
-      selectedBilling: ''
+      solde: this.concialitionCalc,
     }
   },
   computed: {
     soldeColor() {
       if (this.solde === 0) {
-        return 'bg-positive'
+        return 'positive'
       } else {
-        return 'bg-negative'
+        return 'negative'
       }
     },
-    // ...mapGetters([
-    //   'selectedBilling'
-    // ]),
+    concialitionCalc(){
+      const selectedBilling = this.$store.state.selectedBilling
+      const sumSelectedBilling = +selectedBilling.credit + +selectedBilling.debit
+
+      const credit = this.selected.reduce((acc, x) => acc + x.credit,0)
+      const debit = this.selected.reduce((acc, x) => acc + x.debit,0)
+      console.log(credit)
+      console.log(debit)
+      
+      return sumSelectedBilling + credit - debit
+    },
   },
   methods: {
-    startConcialiation(){
+    initConcialiation() {
       this.dialogPrompt = false
       this.dialogReconciliation = true
+      this.selected.push(this.$store.state.selectedBilling)
 
+    },
+    saveConciliation(){
+      console.log(this.solde)
     },
     close() {
       this.dialogPrompt = false
@@ -94,6 +112,9 @@ export default {
       this.dialogReconciliation = false
 
     }
+  },
+  mounted() {
+    console.log(this.$store.state.selectedBilling)
   },
 }
 </script>
