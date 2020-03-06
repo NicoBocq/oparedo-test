@@ -1,5 +1,5 @@
 <template>
-  <div class="q-gutter-md">
+  <div>
     <ClientUsers />
     <ClientSumUp />
   </div>

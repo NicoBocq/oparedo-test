@@ -46,11 +46,19 @@
           <q-file
             label="Pièce jointe"
             dense
+            style="width:150px;"
           >
             <template v-slot:prepend>
               <q-icon name="attach_file" />
             </template>
           </q-file>
+        </q-card-section>
+        <q-card-section class="row items-center">
+          <q-input
+            label="Type de paiement"
+            v-model="newBilling.typePaiement"
+            dense
+          ></q-input>
         </q-card-section>
         <q-card-section class="row items-center">
           <q-input

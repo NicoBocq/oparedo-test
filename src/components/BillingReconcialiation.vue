@@ -38,7 +38,7 @@
             label="Réconcilier les mouvements sélectionnés"
             color="primary"
             @click="saveConcialiation"
-            :disabled="solde != 0"
+            :disabled="concialitionCalc !== 0"
           />
           <q-btn
             flat
@@ -74,25 +74,17 @@ export default {
       solde:'',
     }
   },
-  watch: {
-    solde() {
-      this.solde = this.concialitionCalc
-    }
-  },
   computed: {
     soldeColor() {
-      if (this.solde !== 0) {
-        return 'bg-negative'
+      if (this.concialitionCalc !== 0) {
+        return 'color-negative'
       } else {
-        return 'bg-positive'
+        return 'color-positive'
       }
     },
     concialitionCalc(){
-      // const selectedBilling = this.$store.state.selectedBilling
-      // const sumSelectedBilling = +selectedBilling.credit + +selectedBilling.debit
-
-      let credit = this.selected.reduce((acc, x) => acc + x.credit,0)
-      let debit = this.selected.reduce((acc, x) => acc + x.debit,0)
+      const credit = this.selected.reduce((acc, x) => acc + x.credit,0)
+      const debit = this.selected.reduce((acc, x) => acc + x.debit,0)
       
       return credit - debit
     },
