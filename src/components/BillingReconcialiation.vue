@@ -71,27 +71,30 @@ export default {
     return {
       dialogPrompt: true,
       dialogReconciliation:false,
-      solde: this.concialitionCalc,
+      solde:'',
+    }
+  },
+  watch: {
+    solde() {
+      this.solde = this.concialitionCalc
     }
   },
   computed: {
     soldeColor() {
-      if (this.solde === 0) {
-        return 'positive'
+      if (this.solde !== 0) {
+        return 'bg-negative'
       } else {
-        return 'negative'
+        return 'bg-positive'
       }
     },
     concialitionCalc(){
-      const selectedBilling = this.$store.state.selectedBilling
-      const sumSelectedBilling = +selectedBilling.credit + +selectedBilling.debit
+      // const selectedBilling = this.$store.state.selectedBilling
+      // const sumSelectedBilling = +selectedBilling.credit + +selectedBilling.debit
 
-      const credit = this.selected.reduce((acc, x) => acc + x.credit,0)
-      const debit = this.selected.reduce((acc, x) => acc + x.debit,0)
-      console.log(credit)
-      console.log(debit)
+      let credit = this.selected.reduce((acc, x) => acc + x.credit,0)
+      let debit = this.selected.reduce((acc, x) => acc + x.debit,0)
       
-      return sumSelectedBilling + credit - debit
+      return credit - debit
     },
   },
   methods: {
@@ -101,7 +104,7 @@ export default {
       this.selected.push(this.$store.state.selectedBilling)
 
     },
-    saveConciliation(){
+    saveConcialiation(){
       console.log(this.solde)
     },
     close() {
@@ -110,11 +113,9 @@ export default {
     },
     closeConcialiation(){
       this.dialogReconciliation = false
+      this.$emit('update:selected', [])
 
     }
-  },
-  mounted() {
-    console.log(this.$store.state.selectedBilling)
   },
 }
 </script>

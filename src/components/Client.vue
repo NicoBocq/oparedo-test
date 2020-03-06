@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-xs q-gutter-md">
+  <div class="q-gutter-md">
     <ClientUsers />
     <ClientSumUp />
   </div>

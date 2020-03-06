@@ -8,11 +8,11 @@
       selection="multiple"
       :selected.sync="selected"
       :pagination.sync="pagination"
-      
+
     >
     </q-table>
     <BillingReconcialiation
-      :selected="selected"
+      :selected.sync="selected"
       key="billing-reconciliation"
       v-if="selectedBilling"
     />
