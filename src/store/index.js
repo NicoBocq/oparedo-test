@@ -31,8 +31,8 @@ export default new Vuex.Store({
   state: {
     client:'',
     billings: loadState() || billings,
-    addPopUp:false,
     filter:'',
+    selectedBilling:'',
   },
   mutations: {
     addFilter( state, payload ){
@@ -42,18 +42,23 @@ export default new Vuex.Store({
       state.billings.push(payload)
       saveState(state.billings)
     },
+    addSelectedBilling( state, payload ){
+      state.selectedBilling = payload
+    }
   },
   actions: {
-    /* eslint-disable */
     updateFilter({commit}, payload){
       commit('addFilter', payload)
     },
     updateBillings({commit}, payload){
       commit('addBilling', payload)
     },
+    updateSelectedBilling({commit}, payload){
+      commit('addSelectedBilling', payload)
+    },
   },
   getters: {
-    billings: state => state.billings,
+    selectedBilling: state => state.selectedBilling,
     filter: state => state.filter,
     billingsFiltered: state => {
       if (state.filter !== '') {
@@ -61,6 +66,9 @@ export default new Vuex.Store({
       } else {
         return state.billings
       }
-    }
+    },
+    // filteredData: state => {
+    //   return state.bilings.filter(billing => billing.name.includes(this.search.toLowerCase()))
+    // }
   },
 });

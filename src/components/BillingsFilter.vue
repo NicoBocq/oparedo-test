@@ -37,29 +37,31 @@
         </q-item>
       </q-list>
     </q-btn-dropdown>
+    <q-btn @click="clear" label="Clear"></q-btn>
+    <q-space />
     <q-btn-dropdown color="primary" label="Mouvements">
-          <q-list>
-            <q-item clickable v-close-popup @click="alert=!alert">
-              <q-item-section>
-                <q-item-label>Saisir un paiement</q-item-label>
-              </q-item-section>
-            </q-item>
+      <q-list>
+        <q-item clickable v-close-popup @click="alert=!alert">
+          <q-item-section>
+            <q-item-label>Saisir un paiement</q-item-label>
+          </q-item-section>
+        </q-item>
 
-            <q-item clickable v-close-popup>
-              <q-item-section>
-                <q-item-label>Saisir une opération diverse</q-item-label>
-              </q-item-section>
-            </q-item>
+        <q-item clickable v-close-popup>
+          <q-item-section>
+            <q-item-label>Saisir une opération diverse</q-item-label>
+          </q-item-section>
+        </q-item>
 
-            <q-item clickable v-close-popup>
-              <q-item-section>
-                <q-item-label>Saisir un impayé</q-item-label>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </q-btn-dropdown>
-        <q-btn @click="clear" label="Clear"></q-btn>
-        <AddBilling :alert.sync="alert" />
+        <q-item clickable v-close-popup>
+          <q-item-section>
+            <q-item-label>Saisir un impayé</q-item-label>
+          </q-item-section>
+        </q-item>
+      </q-list>
+    </q-btn-dropdown>
+        
+    <AddBilling :alert.sync="alert" />
   </div>
 </template>
 

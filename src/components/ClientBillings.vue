@@ -8,8 +8,10 @@
       :selected-rows-label="getSelectedString"
       selection="multiple"
       :selected.sync="selected"
+      :pagination="pagination"
     >
     </q-table>
+    <BillingReconcialiation v-if="selectedBilling" :selected ="selected" />
   </div>
 </template>
 
@@ -17,21 +19,28 @@
 
 import * as moment from 'moment'
 import { mapGetters } from 'vuex'
+import BillingReconcialiation from '@/components/BillingReconcialiation'
 
 export default {
-  
+  components: {
+    BillingReconcialiation
+  },
   data () {
     return {
       selected: [],
       pagination: {
-        rowsPerPage: 0
+        rowsPerPage: 50
+        
       },
       columns: [
         {
-          name: 'date',
+          name: 'desc',
+          required: true,
           label: 'Date',
-          align: 'center',
-          field: 'createdAt',
+          align: 'left',
+          field: row => row.createdAt,
+          format: val => `${val}`,
+          sortable: true
         },
         { 
           name: 'history',
@@ -116,17 +125,20 @@ export default {
     }
   },
   computed: {
+    // ...mapState(['billings']),
     ...mapGetters([
-      'billingsFiltered'
-    ])
+      'billingsFiltered', 'selectedBilling'
+    ]),
   },
   methods: {
     getSelectedString() {
       return this.selected.length === 0 ? '' : `${this.selected.length} record${this.selected.length > 1 ? 's' : ''} selected of ${this.data.length}`
     },
   },
-  mounted() {
-    
+  watch: {
+    data(val){
+      console.log(val)
+    }
   },
 }
 </script>
