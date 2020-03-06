@@ -1,12 +1,12 @@
 const billings = [
   {
     id:1,
-    createdAt: "12/04/2020",
+    createdAt: new Date('2019-12-17'),
     history:true,
     type:"Paiement",
     invoiceNumber:"",
     contractNumber:"000001",
-    debit:200,
+    debit:800,
     credit:"",
     dueDate:"",
     document:true,
@@ -16,7 +16,7 @@ const billings = [
   },
   {
     id:2,
-    createdAt: "12/04/2020",
+    createdAt: new Date('2020-1-17'),
     history:true,
     type:"Paiement",
     invoiceNumber:"",
@@ -31,7 +31,7 @@ const billings = [
   },
   {
     id:3,
-    createdAt: "12/04/2020",
+    createdAt: new Date('2020-2-3'),
     history:true,
     type:"Zob",
     invoiceNumber:"",
@@ -46,7 +46,7 @@ const billings = [
   },
   {
     id:4,
-    createdAt: "12/04/2020",
+    createdAt: new Date('2020-1-21'),
     history:true,
     type:"Zob",
     invoiceNumber:"",

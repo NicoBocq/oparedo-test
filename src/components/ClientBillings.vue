@@ -34,7 +34,6 @@ export default {
         rowsPerPage: 50,
         sortBy: 'date',
         descending: true,
-        order: 'desc',
       },
       columns: [
         {

@@ -1,6 +1,10 @@
 <template>
-  <div class="q-gutter-md">
-    <q-input v-model="search" label="Rechercher par montant ou lettrage"></q-input>
+  <div class="q-my-md q-gutter-sm full-width row wrap justify-evenly items-center ">
+    <q-input 
+      v-model="search"
+      label="Rechercher par montant ou lettrage"
+      style="width=350px"
+      ></q-input>
     <q-select
       v-model="multiple"
       multiple
@@ -15,8 +19,8 @@
       v-model="model"
       :options="options"
       label="Recouvrement"
+      style="width: 250px"
     />
-    <q-btn @click="setFilter('Paiement')" label="Go"></q-btn>
     
     <q-btn-dropdown
       split
@@ -37,7 +41,13 @@
         </q-item>
       </q-list>
     </q-btn-dropdown>
-    <q-btn @click="clear" label="Clear"></q-btn>
+    <q-btn
+      icon="close"
+      flat
+      round
+      dense
+      @click="clear"
+    />  
     <q-space />
     <q-btn-dropdown color="primary" label="Mouvements">
       <q-list>
