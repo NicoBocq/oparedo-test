@@ -27,8 +27,9 @@
                 label="Montant"
                 v-model.number="newBilling.credit"
                 type="number"
-                dense
+                
                 class="q-ml-md"
+                :rules="[val => !!val || 'Champ obligatoire']"
               ></q-input>
             </template>
 
@@ -37,8 +38,8 @@
                 label="Montant"
                 v-model.number="newBilling.debit"
                 type="number"
-                dense
                 class="q-ml-md"
+                :rules="[val => !!val || 'Champ obligatoire']"
               ></q-input>
             </template>
         </q-card-section>

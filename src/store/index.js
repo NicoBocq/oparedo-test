@@ -34,7 +34,7 @@ export default new Vuex.Store({
     selectedBilling:'',
   },
   mutations: {
-    addFilter( state, payload ){
+    SET_FILTER( state, payload ){
       state.filter = payload
     },
     addBilling( state, payload ){
@@ -43,17 +43,27 @@ export default new Vuex.Store({
     },
     addSelectedBilling( state, payload ){
       state.selectedBilling = payload
-    }
+    },
+    addConciliationsBillings( state, payload ){
+      state.selectedBilling = payload
+    },
+    // SET_BILLING (state, items) {
+    //   items = items.map(item => ({...item, humidex: getHumidex(item)}))
+    //   state.items = items
+    // },
   },
   actions: {
     updateFilter({commit}, payload){
-      commit('addFilter', payload)
+      commit('SET_FILTER', payload)
     },
     updateBillings({commit}, payload){
       commit('addBilling', payload)
     },
     updateSelectedBilling({commit}, payload){
       commit('addSelectedBilling', payload)
+    },
+    updateConciliationsBillings({commit}, payload){
+      commit('addConciliationsBillings', payload)
     },
   },
   getters: {

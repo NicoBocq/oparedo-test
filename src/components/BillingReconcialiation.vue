@@ -71,15 +71,14 @@ export default {
     return {
       dialogPrompt: true,
       dialogReconciliation:false,
-      solde:'',
     }
   },
   computed: {
     soldeColor() {
       if (this.concialitionCalc !== 0) {
-        return 'color-negative'
+        return 'text-negative'
       } else {
-        return 'color-positive'
+        return 'text-positive'
       }
     },
     concialitionCalc(){
@@ -94,10 +93,17 @@ export default {
       this.dialogPrompt = false
       this.dialogReconciliation = true
       this.selected.push(this.$store.state.selectedBilling)
-
     },
     saveConcialiation(){
-      console.log(this.solde)
+      const updateSelected = this.selected.map(item => ({
+        ...item,
+        lettering: "20.AAAAV",
+        recovery: "Soldée"
+      }))
+      console.log(updateSelected)
+      this.closeConcialiation()
+      this.showNotif()
+      // this.$store.dispatch('updateBillings', updateSelected )
     },
     close() {
       this.dialogPrompt = false
@@ -106,8 +112,16 @@ export default {
     closeConcialiation(){
       this.dialogReconciliation = false
       this.$emit('update:selected', [])
-
-    }
+      this.$store.dispatch('updateSelectedBilling', '' )
+    },
+    showNotif() {
+      this.$q.notify({
+        position: 'top',
+        message: 'Mouvements reconciliés',
+        color: 'positive',
+        timeout: 1500,
+      })
+    },
   },
 }
 </script>

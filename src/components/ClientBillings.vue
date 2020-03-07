@@ -10,6 +10,20 @@
       :pagination.sync="pagination"
 
     >
+      <!-- <template v-slot:body="props">
+        <q-tr :props="props">
+          <q-td auto-width>
+            <q-checkbox v-if="props.row['recovery']!='Soldée'" color="primary" v-model="props.selected"/>
+          </q-td>
+          <q-td
+            v-for="col in props.cols"
+            :key="col.name"
+            :props="props"
+          >
+            {{ props.row[col.field] }}
+          </q-td>
+        </q-tr>
+      </template> -->
     </q-table>
     <BillingReconcialiation
       :selected.sync="selected"
@@ -42,7 +56,7 @@ export default {
           name: 'date',
           required: true,
           label: 'Date',
-          align: 'left',
+          align: 'center',
           field: row => row.createdAt,
           format: val => moment(val).format('D/M/YYYY'),
           sortable: true
@@ -66,19 +80,20 @@ export default {
           label: 'Numéro de facture',
           field: 'invoiceNumber',
           align: 'center',
+          sortable: true,
         },
         { 
           name: 'contractNumber',
           label: 'Numéro de contrat',
           field: 'contractNumber',
           align: 'center',
+          sortable: true,
         },
         { 
           name: 'debit',
           label: 'Débit',
           field: 'debit',
           sortable: true,
-          sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
           align: 'center',
         },
         { 
@@ -86,34 +101,36 @@ export default {
           label: 'Crédit',
           field: 'credit',
           sortable: true,
-          sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
           align: 'center',
         },
-        { 
-          name: 'dueDate',
-          label: "Date d'échéance",
-          field: 'dueDate',
-          sortable: true,
-          sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
-          align: 'center',
-        },
-        { 
-          name: 'document',
-          label: "Document",
-          field: 'document',
-          align: 'center',
-        },
+        // { 
+        //   name: 'dueDate',
+        //   label: "Date d'échéance",
+        //   field: 'dueDate',
+        //   sortable: true,
+        //   align: 'center',
+        //   format: val => moment(val).format('D/M/YYYY'),
+        // },
+        // { 
+        //   name: 'document',
+        //   label: "Document",
+        //   field: 'document',
+        //   align: 'center',
+        //   sortable: true,
+        // },
         { 
           name: 'lettering',
           label: "Lettrage",
           field: 'lettering',
           align: 'center',
+          sortable: true,
         },
         { 
           name: 'recovery',
           label: "Recouvrement",
           field: 'recovery',
           align: 'center',
+          sortable: true,
         },
         { 
           name: 'actions',

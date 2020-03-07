@@ -5,19 +5,10 @@
       label="Rechercher par montant ou lettrage"
       style="width:350px"
       ></q-input>
-    <q-select
-      v-model="multiple"
-      multiple
-      :options="options"
-      label="Type"
-      style="width: 250px"
-      use-chips
-      stack-label
-    />
     
     <q-btn-dropdown
       split
-      label="Lettrage"
+      label="Paiement"
       @click="setFilter('Paiement')"
     >
       <q-list>
@@ -27,9 +18,9 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable v-close-popup @click="setFilter">
+        <q-item clickable v-close-popup @click="setFilter('Facture')">
           <q-item-section>
-            <q-item-label>Vacation</q-item-label>
+            <q-item-label>Facture</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -92,7 +83,7 @@ export default {
       this.$store.dispatch('updateFilter', filter )
     },
     clear() {
-      this.$store.commit('addFilter', '')
+      this.$store.dispatch('updateFilter', '')
     }
   },
   watch: {
