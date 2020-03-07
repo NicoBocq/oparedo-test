@@ -106,6 +106,7 @@ export default {
     },
     close() {
       this.dialogPrompt = false
+      this.$emit('update:selected', [])
       this.$store.dispatch('updateSelectedBilling', '' )
     },
     closeConcialiation(){
