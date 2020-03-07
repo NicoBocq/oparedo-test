@@ -41,11 +41,11 @@ export default new Vuex.Store({
     SET_SEARCH( state, payload ){
       state.filter = payload
     },
-    addBilling( state, payload ){
+    ADD_BILLING( state, payload ){
       state.billings.push(payload)
       saveState(state.billings)
     },
-    addSelectedBilling( state, payload ){
+    SELECTED_BILLING( state, payload ){
       state.selectedBilling = payload
     },
     UPDATE_CONCILIATIONS( state, payload ){
@@ -64,10 +64,10 @@ export default new Vuex.Store({
       commit('SET_SEARCH', payload)
     },
     updateBillings({commit}, payload){
-      commit('addBilling', payload)
+      commit('ADD_BILLING', payload)
     },
     updateSelectedBilling({commit}, payload){
-      commit('addSelectedBilling', payload)
+      commit('SELECTED_BILLING', payload)
     },
     updateConciliationsBillings({commit}, payload){
       commit('UPDATE_CONCILIATIONS', payload)
