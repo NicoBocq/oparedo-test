@@ -74,6 +74,7 @@
       </q-card>    
     </div>
   </div>
+  <q-separator v-if="!isOpen" />
  </div>
 </template>
 

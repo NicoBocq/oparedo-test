@@ -1,10 +1,13 @@
 <template>
-  <div class="q-my-md q-gutter-sm full-width row wrap justify-evenly items-center ">
+  <div class="q-my-md q-gutter-sm full-width row justify-evenly items-center ">
     <q-input 
-      v-model="search"
       label="Rechercher par montant ou lettrage"
       style="width:350px"
-      ></q-input>
+      >
+        <template v-slot:append>
+          <q-icon name="search" />
+        </template>
+      </q-input>
     
     <q-btn-dropdown
       split
@@ -71,23 +74,28 @@ export default {
     return {
       multiple: null,
       model: null,
-      options: [
-        'Paiement', 'Zob'
-      ],
-      search:'',
-      alert:false
+      alert:false,
+      filter:'',
+      search:'', 
     }
   },
   methods: {
     setFilter(filter) {
       this.$store.dispatch('updateFilter', filter )
     },
+    setSearch(search) {
+      this.$store.dispatch('updateSearch', search )
+    },
     clear() {
       this.$store.dispatch('updateFilter', '')
+      this.$store.dispatch('updateSearch', '')
     }
   },
   watch: {
     search(val) {
+      if (!val) return
+
+      this.setSearch(val)
       console.log(val)
     }
   },

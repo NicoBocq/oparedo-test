@@ -18,8 +18,12 @@
       <q-card flat bordered style="width:100%" v-if="layout" key="layout-encours">
         <q-card-section horizontal>
           <q-card-section class="q-pt-xs">
-            <div class="text-overline">Overline</div>
-            <div class="text-h5 q-mt-sm q-mb-xs">Total de l'encours</div>
+            <!-- <div class="text-overline">Overline</div>
+            <div class="text-h5 q-mt-sm q-mb-xs">Total de l'encours</div> -->
+            <q-range
+              :min="0"
+              :max="50"
+            />
           </q-card-section>
         </q-card-section>
       </q-card>

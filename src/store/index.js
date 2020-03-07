@@ -31,10 +31,14 @@ export default new Vuex.Store({
   state: {
     billings: loadState() || billings,
     filter:'',
+    search:'',
     selectedBilling:'',
   },
   mutations: {
     SET_FILTER( state, payload ){
+      state.filter = payload
+    },
+    SET_SEARCH( state, payload ){
       state.filter = payload
     },
     addBilling( state, payload ){
@@ -56,6 +60,9 @@ export default new Vuex.Store({
     updateFilter({commit}, payload){
       commit('SET_FILTER', payload)
     },
+    updateSearch({commit}, payload){
+      commit('SET_SEARCH', payload)
+    },
     updateBillings({commit}, payload){
       commit('addBilling', payload)
     },
@@ -72,12 +79,15 @@ export default new Vuex.Store({
     billingsFiltered: state => {
       if (state.filter !== '') {
         return state.billings.filter(billing => billing.type === state.filter)
+      } else if (state.search) {
+        return state.bilings.filter(billing => {
+          billing.credit.includes(state.search.toLowerCase())
+          || billing.debit.includes(state.search.toLowerCase())
+          || billing.lettering.includes(state.search.toLowerCase())
+        })
       } else {
         return state.billings
       }
     },
-    // filteredData: state => {
-    //   return state.bilings.filter(billing => billing.name.includes(this.search.toLowerCase()))
-    // }
   },
 });
