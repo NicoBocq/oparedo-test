@@ -48,13 +48,13 @@ export default new Vuex.Store({
     addSelectedBilling( state, payload ){
       state.selectedBilling = payload
     },
-    addConciliationsBillings( state, payload ){
-      state.selectedBilling = payload
+    UPDATE_CONCILIATIONS( state, payload ){
+      payload.forEach(billing => {
+        const findBilling = state.billings.find(x => x.id === billing.id )
+        const index = state.billings.indexOf(findBilling)
+        Object.assign(state.billings[index], billing)
+      })
     },
-    // SET_BILLING (state, items) {
-    //   items = items.map(item => ({...item, humidex: getHumidex(item)}))
-    //   state.items = items
-    // },
   },
   actions: {
     updateFilter({commit}, payload){
@@ -70,7 +70,7 @@ export default new Vuex.Store({
       commit('addSelectedBilling', payload)
     },
     updateConciliationsBillings({commit}, payload){
-      commit('addConciliationsBillings', payload)
+      commit('UPDATE_CONCILIATIONS', payload)
     },
   },
   getters: {
@@ -81,8 +81,8 @@ export default new Vuex.Store({
         return state.billings.filter(billing => billing.type === state.filter)
       } else if (state.search) {
         return state.bilings.filter(billing => {
-          billing.credit.includes(state.search.toLowerCase())
-          || billing.debit.includes(state.search.toLowerCase())
+          billing.credit.includes(state.search)
+          || billing.debit.includes(state.search)
           || billing.lettering.includes(state.search.toLowerCase())
         })
       } else {

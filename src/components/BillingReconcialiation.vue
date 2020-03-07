@@ -98,12 +98,11 @@ export default {
       const updateSelected = this.selected.map(item => ({
         ...item,
         lettering: "20.AAAAV",
-        recovery: "Soldée"
+        recovery: item.type === 'Facture' ? "Soldée" : ""
       }))
-      console.log(updateSelected)
+      this.$store.dispatch('updateConciliationsBillings', updateSelected )
       this.closeConcialiation()
       this.showNotif()
-      // this.$store.dispatch('updateBillings', updateSelected )
     },
     close() {
       this.dialogPrompt = false
