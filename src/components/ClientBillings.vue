@@ -92,7 +92,7 @@ export default {
       pagination: {
         rowsPerPage: 50,
         sortBy: 'createdAt',
-        descending: false,
+        descending: true,
       },
       columns: [
         {

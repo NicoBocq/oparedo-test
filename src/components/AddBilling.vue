@@ -27,7 +27,6 @@
                 label="Montant"
                 v-model.number="newBilling.credit"
                 type="number"
-                
                 class="q-ml-md"
                 :rules="[val => !!val || 'Champ obligatoire']"
               ></q-input>
@@ -46,10 +45,9 @@
         <q-card-section class="row items-center">
           <q-file
             label="Pièce jointe"
-            dense
-            style="width:150px;"
+            style="width:200px;"
           >
-            <template v-slot:prepend>
+            <template v-slot:before>
               <q-icon name="attach_file" />
             </template>
           </q-file>
@@ -58,15 +56,17 @@
           <q-input
             label="Type de paiement"
             v-model="newBilling.typePaiement"
-            dense
           ></q-input>
         </q-card-section>
         <q-card-section class="row items-center">
           <q-input
-            label="Date de paiement"
             v-model="newBilling.createdAt"
-            dense
-          ></q-input>
+            type="date"
+          >
+            <template v-slot:before>
+              <q-icon name="event" />
+            </template>
+          </q-input>
         </q-card-section>
         <q-card-actions align="right">
           <q-btn flat label="Annuler" color="light" @click="reset" />
@@ -90,16 +90,17 @@ export default {
       newBilling:{
         credit:'',
         debit:'',
+        createdAt:''
       },
       defaultBilling:{
         credit:'',
         debit:'',
+        createdAt:''
       }
     }
   },
   methods: {
     saveBilling() {
-      this.newBilling.createdAt = Date.now()
       this.newBilling.id = Math.random().toString(36).substr(2, 9)
       this.$store.dispatch('updateBillings', this.newBilling)
       this.$store.dispatch('updateSelectedBilling', this.newBilling )

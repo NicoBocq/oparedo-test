@@ -3,7 +3,7 @@ const billings = [
     id:1,
     createdAt: new Date('2019-12-17'),
     history:true,
-    type:"Paiement",
+    type:"Facture",
     invoiceNumber:"",
     contractNumber:"000001",
     debit:800,
@@ -11,7 +11,7 @@ const billings = [
     dueDate:"",
     document:true,
     lettering:"",
-    recovery:"",
+    recovery:"Non-échu",
     actions:"",
   },
   {
