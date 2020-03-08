@@ -4,26 +4,28 @@
       label="Rechercher par montant ou lettrage"
       style="width:350px"
       v-model="search"
+      class="q-mr-md"
     >
         <template v-slot:append>
           <q-icon name="search" />
         </template>
       </q-input>
     <q-btn-dropdown
+      label="Type"
       split
-      label="Paiement"
-      @click="setFilter('Paiement')"
+      @click="setFilter()"
+      class="q-mr-md"
     >
       <q-list>
-        <q-item clickable v-close-popup @click="setFilter('Paiement')">
+        <q-item
+          clickable
+          v-close-popup
+          v-for="(type, index) in types"
+          @click="setFilter(type)"
+          :key="'select'+index"
+        >
           <q-item-section>
-            <q-item-label>Paiement</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item clickable v-close-popup @click="setFilter('Facture')">
-          <q-item-section>
-            <q-item-label>Facture</q-item-label>
+            <q-item-label>{{ type }}</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -76,6 +78,7 @@ export default {
       model: null,
       alert:false,
       search:'',
+      types:['Paiement', 'Facture']
     }
   },
   methods: {
@@ -93,10 +96,7 @@ export default {
   },
   watch: {
     search(val) {
-      if (!val) return
-
       this.setSearch(val)
-    
     }
   },
   

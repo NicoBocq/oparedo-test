@@ -80,10 +80,9 @@ export default new Vuex.Store({
       if (state.filter) {
         return state.billings.filter(billing => billing.type === state.filter)
       } else if (state.search) {
-        console.log(state.search)
         return state.billings.filter(billing => {
-          billing.credit == state.search || billing.debit == state.search 
-          || billing.lettering == state.search
+          return billing.lettering == state.search || billing.debit == state.search  
+          || billing.credit == state.search
         })
       } else {
         return state.billings
