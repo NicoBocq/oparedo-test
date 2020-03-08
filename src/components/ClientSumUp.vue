@@ -15,16 +15,27 @@
         @click="toggleInfo"
       />
     </q-toolbar>
-      <q-card flat bordered style="width:100%" v-if="layout" key="layout-encours">
-        <q-card-section horizontal>
-          <q-card-section class="q-pt-xs">
-            <!-- <div class="text-overline">Overline</div>
-            <div class="text-h5 q-mt-sm q-mb-xs">Total de l'encours</div> -->
-            <q-range
-              :min="0"
-              :max="50"
-            />
-          </q-card-section>
+      <q-card
+        flat
+        style="width:100%"
+        v-if="layout"
+        key="layout-encours"
+      >
+        <q-card-section>
+          Encours non-échu
+          <q-linear-progress size="30px" :value="progress1" color="green" class="q-mt-sm">
+          <div class="absolute-full flex flex-center">
+            <q-badge color="white" text-color="green" label="24 302" />
+          </div>
+          </q-linear-progress>
+        </q-card-section>
+        <q-card-section>
+          Encours échu
+          <q-linear-progress size="30px" :value="progress2" color="red" class="q-mt-sm">
+            <div class="absolute-full flex flex-center">
+              <q-badge color="white" text-color="red" label="118 861" />
+            </div>
+          </q-linear-progress>
         </q-card-section>
       </q-card>
     </div>
@@ -36,7 +47,9 @@ export default {
 
   data() {
     return {
-      layout:false
+      layout:false,
+      progress1:0.2,
+      progress2:0.8,
     }
   },
   methods: {
