@@ -54,6 +54,7 @@ export default new Vuex.Store({
         const index = state.billings.indexOf(findBilling)
         Object.assign(state.billings[index], billing)
       })
+      saveState(state.billings)
     },
   },
   actions: {
@@ -77,10 +78,10 @@ export default new Vuex.Store({
     selectedBilling: state => state.selectedBilling,
     filter: state => state.filter,
     billingsFiltered: state => {
-      if (state.filter !== '') {
+      if (state.filter) {
         return state.billings.filter(billing => billing.type === state.filter)
       } else if (state.search) {
-        return state.bilings.filter(billing => {
+        return state.billings.filter(billing => {
           billing.credit.includes(state.search)
           || billing.debit.includes(state.search)
           || billing.lettering.includes(state.search.toLowerCase())
