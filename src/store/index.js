@@ -39,7 +39,7 @@ export default new Vuex.Store({
       state.filter = payload
     },
     SET_SEARCH( state, payload ){
-      state.filter = payload
+      state.search = payload
     },
     ADD_BILLING( state, payload ){
       state.billings.push(payload)
@@ -76,15 +76,14 @@ export default new Vuex.Store({
   },
   getters: {
     selectedBilling: state => state.selectedBilling,
-    filter: state => state.filter,
     billingsFiltered: state => {
       if (state.filter) {
         return state.billings.filter(billing => billing.type === state.filter)
       } else if (state.search) {
+        console.log(state.search)
         return state.billings.filter(billing => {
-          billing.credit.includes(state.search)
-          || billing.debit.includes(state.search)
-          || billing.lettering.includes(state.search.toLowerCase())
+          billing.credit == state.search || billing.debit == state.search 
+          || billing.lettering == state.search
         })
       } else {
         return state.billings

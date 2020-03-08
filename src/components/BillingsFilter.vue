@@ -3,12 +3,12 @@
     <q-input 
       label="Rechercher par montant ou lettrage"
       style="width:350px"
-      >
+      v-model="search"
+    >
         <template v-slot:append>
           <q-icon name="search" />
         </template>
       </q-input>
-    
     <q-btn-dropdown
       split
       label="Paiement"
@@ -75,8 +75,7 @@ export default {
       multiple: null,
       model: null,
       alert:false,
-      filter:'',
-      search:'', 
+      search:'',
     }
   },
   methods: {
@@ -89,6 +88,7 @@ export default {
     clear() {
       this.$store.dispatch('updateFilter', '')
       this.$store.dispatch('updateSearch', '')
+      this.search = ''
     }
   },
   watch: {
@@ -96,7 +96,7 @@ export default {
       if (!val) return
 
       this.setSearch(val)
-      console.log(val)
+    
     }
   },
   

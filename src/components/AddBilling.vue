@@ -88,23 +88,19 @@ export default {
     return {
       toggleType:'',
       newBilling:{
-        createdAt: Date.now(),
-        id: Math.random().toString(36).substr(2, 9),
-        credit:null,
-        debit:null,
+        credit:'',
+        debit:'',
       },
       defaultBilling:{
-        createdAt: Date.now(),
-        id:'',
-        credit:null,
-        debit:null,
+        credit:'',
+        debit:'',
       }
     }
   },
   methods: {
     saveBilling() {
-      // this.$store.dispatch('updateSelectedBilling', '' )
-      // this.$store.commit('addBilling', this.newBilling)
+      this.newBilling.createdAt = Date.now()
+      this.newBilling.id = Math.random().toString(36).substr(2, 9)
       this.$store.dispatch('updateBillings', this.newBilling)
       this.$store.dispatch('updateSelectedBilling', this.newBilling )
       this.showNotif()
